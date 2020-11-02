@@ -1,15 +1,70 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <script src="main.js"></script>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <hr/>
-    <div id="display-element"></div>
-    <button onclick="displayDate()">Click Me</button>
-    <hr/>
-  </body>
+	<head>
+		<title>RPS</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="style.css"  media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type='text/javascript' src='main.js'></script>
+    <link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+	    <nav>
+		    <div class="nav-wrapper jake-yellow">
+		      <div class='brand-logo center'>Rock Paper Scissors</div>
+		    </div>
+		  </nav>
+	  <div class='row center'>
+	  	<div class="col s12 m2 offset-m1">
+        <div id='user_score' class="card-panel score-card">
+          <span class="white-text">Your Wins:
+          	<span id='user_wins'>0</span>
+          </span>
+          <br>
+          <span id='user_percent' class="white-text"></span>
+        </div>
+      </div>
+	  	<div class="col s12 m2 offset-m6">
+        <div id='comp_score' class="card-panel">
+          <span class="white-text">Computer Wins:
+          	<span id="comp_wins">0</span>
+          </span>
+          <br>
+          <span id='comp_percent' class="white-text"></span>
+        </div>
+      </div>
+	  </div>
+	  <div class='row buttons'>
+	  	<h2 class='center sub-heading'>Click an option to play</h2>
+		  <div id='selections' class='container col m2 center offset-m3'>
+		  	<div class='btn btn-large btn-floating selection-btn' onClick="select('rock')">
+		  		<img src="http://vignette2.wikia.nocookie.net/adventuretimewithfinnandjake/images/0/0b/Rock.png/revision/latest?cb=20120809154917" alt="ROCK" class="rock-img">
+		  	</div>
+		  </div>
+		  <div id='selections' class='container col m2 center'>
+		  	<div class='btn btn-large btn-floating selection-btn' onClick="select('paper')">
+		  		<img src="http://vignette1.wikia.nocookie.net/adventuretimewithfinnandjake/images/2/25/Paper_Pete.png/revision/latest?cb=20120823104606" alt="Paper">
+		  	</div>
+		  </div>
+		  <div id='selections' class='container col m2 center'>
+		  	<div class='btn btn-large btn-floating selection-btn' onClick="select('scissors')">
+		  		<img src="http://www.clipartbest.com/cliparts/yio/7rG/yio7rGniE.png" alt="Scissors">
+		  	</div>
+		  </div>
+		</div>
+		<div class='row center'>
+			<div class='col m2 offset-m3'>
+				<h5 id='user_select'></h2>
+			</div>
+			<div class='col m2 offset-m2'>
+				<h5 id='comp_select'></h2>
+			</div>
+			<div class='clearfix'></div>
+			<div class='col m4 offset-m4'>
+				<h1 id='result'></h1>
+			</div>
+		</div>
+	</body>
 </html>

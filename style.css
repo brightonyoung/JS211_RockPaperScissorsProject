@@ -1,0 +1,56 @@
+html {
+	font-family: 'Fredoka One', cursive !important;
+	background: url(http://www.pixelstalk.net/wp-content/uploads/2016/01/Adventure-Time-Forest-Wallpaper-HD.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.brand-logo {
+	color: #304011 !important;
+}
+
+.selection-btn {
+	width: 150px !important;
+	height: 150px !important;
+	line-height: 175px;
+	background-color: #57C848;
+}
+
+.buttons {
+	margin-top: 0;
+}
+
+img {
+	height: 80%;
+	margin-top: 15px;
+
+}
+
+.rock-img {
+	height: 50%;
+	margin-top: 40px;
+}
+
+.sub-heading {
+	margin-top: 0;
+}
+
+.score-boards {
+	margin-bottom: 0;
+}
+
+.jake-yellow {
+	background-color: #F8C03A;
+}
+
+.card-panel {
+	background-color: #57C848 !important;
+}
+
+#result {
+	background-color: #70DAFD;
+	border-radius: 20px;
+	box-shadow: 10px 10px 10px rgba(0,0,0,0.7);
+}

@@ -1,3 +1,56 @@
+var options = ['rock', 'paper', 'scissors'];
+
+function randChoice() {
+    return Math.floor(Math.random() * 3);
+}
+
+function increment(winner) {
+	currentScore = parseInt(document.getElementById(winner + '_wins').innerHTML);
+	document.getElementById(winner + '_wins').innerHTML = currentScore + 1;
+	percentWins();
+}
+
+function percentWins() {
+	userWins = parseInt(document.getElementById('user_wins').innerHTML);
+	compWins = parseInt(document.getElementById('comp_wins').innerHTML);
+	totalWins = userWins + compWins;
+	document.getElementById('user_percent').innerHTML = "Percent Won: " + Math.round((userWins/totalWins) * 100) + "%";
+	document.getElementById('comp_percent').innerHTML = "Percent Won: " + Math.round((compWins/totalWins) * 100) + "%";
+	highlightLeader(userWins, compWins);
+}
+
+function highlightLeader(user_wins, comp_wins) {
+	if(user_wins === comp_wins) {
+		document.getElementById('user_score').style.borderRight = '';
+		document.getElementById('user_score').style.borderLeft = '';
+		document.getElementById('comp_score').style.borderRight = '';
+		document.getElementById('comp_score').style.borderLeft = '';
+	} else {
+		leader = user_wins > comp_wins ? 'user' : 'comp';
+		document.getElementById(leader + '_score').style.borderRight = '10px solid #FFFF4F';
+		document.getElementById(leader + '_score').style.borderLeft = '10px solid #FFFF4F';
+	}
+}
+
+function select(s) {
+	randSelection = randChoice()
+	if((options.indexOf(s) + 1) % 3 === randSelection) {
+		result = 'You lose!';
+		increment('comp');
+	} else if((options.indexOf(s) - 1) % 3 === randSelection) {
+		result = 'You win!';
+		increment('user');
+	} else if((options.indexOf(s) - 1) === -1 && randSelection === 2) {
+		result = 'You win!';
+		increment('user');
+	} else {
+		result = 'Tie!';
+	}
+	document.getElementById('user_select').innerHTML = "You:<br>" + s;
+	document.getElementById('comp_select').innerHTML = "Computer:<br>" + options[randSelection];
+	document.getElementById('result').innerHTML = result;
+};
+
 // uses strict mode so strings are not coerced, variables are not hoisted, etc... 
 'use strict';
 
@@ -13,7 +66,70 @@ const rl = readline.createInterface({
 
 // the function that will be called by the unit test below
 const rockPaperScissors = (hand1, hand2) => {
+  let throw1 = hand1.trim().toLowerCase();
+  let throw2 = hand2.trim().toLowerCase();
+  console.log(throw1 + " vs " + throw2)
+  // if (throw1 === throw2) {
+  //     return "It's a tie!"
+  //   } else if (throw1 === "rock" && throw2 === "scissors") {
+  //     return "Hand one wins!"
+  //   } else if (throw1 === "rock" && throw2 === "paper") {
+  //     return "Hand two wins!"
+  //   } else if (throw1 === "paper" && throw2 === "rock") {
+  //     return "Hand one wins!"
+  //   } else if (throw1 === "paper" && throw2 === "scissors") {
+  //     return "Hand two wins!"
+  //   } else if (throw1 === "scissors" && throw2 === "paper") {
+  //     return "Hand one wins!"
+  //   } else if (throw1 === "scissors" && throw2 === "rock") {
+  //     return "Hand two wins!"
+  //   } else {
+  //     return "Invalid option given. Have you ever played this before?"
+  //   }
 
+  if (throw1 === throw2) {
+      return "It's a tie!"
+    } else if (throw1 === "rock" && throw2 === "scissors" || throw1 === "paper" && throw2 === "rock" || throw1 === "scissors" && throw2 === "paper") {
+      return "Hand one wins!"
+    } else if (throw1 === "rock" && throw2 === "paper" || throw1 === "paper" && throw2 === "scissors" || throw1 === "scissors" && throw2 === "rock") {
+      return "Hand two wins!"
+    } else if (throw1 === "" || throw2 === "" ) {
+      return "Each player must thow a hand. Please try again."
+    } else {
+      return "Invalid option given. Have you ever played this before?"
+    }
+
+  // if (throw1 === throw2) {
+  //   return "It's a tie!"
+  //   } else if (throw1 === "rock") {
+  //     if (throw2 === "scissors") {
+  //       return "Hand one wins!"
+  //     } else if (throw2 === "paper") {
+  //       return "Hand two wins!"
+  //     } else {
+  //       return "Invalid option given by Player 2. Have you ever played this before?"
+  //     }
+  //   } else if (throw1 === "paper") {
+  //     if (throw2 === "rock") {
+  //       return "Hand one wins!"
+  //     } else if (throw2 === "scissors") {
+  //       return "Hand two wins!"
+  //     } else {
+  //       return "Invalid option given by Player 2. Have you ever played this before?"
+  //     }
+  //   } else if (throw1 === "scissors") {
+  //     if (throw2 === "paper") {
+  //       return "Hand one wins!"
+  //     } else  if (throw2 === "rock") {
+  //       return "Hand two wins!"
+  //     } else {
+  //       return "Invalid option given by Player 2. Have you ever played this before?"
+  //     }
+  //   } else {
+  //     return "Invalid option given by Player 1. Have you ever played this before?"
+  //   }
+
+  
   // Write code here
   // Use the unit test to see what is expected
 
@@ -52,6 +168,15 @@ if (typeof describe === 'function') {
       assert.equal(rockPaperScissors('rOcK', ' paper '), "Hand two wins!");
       assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "Hand two wins!");
       assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
+    });
+    it('should thrown an error message if no input is given', () => {
+      assert.equal(rockPaperScissors('rOcK', ''), "Each player must thow a hand. Please try again.");
+      assert.equal(rockPaperScissors('', 'SCISSORS'), "Each player must thow a hand. Please try again.");
+    });
+    it('should detect if an invalid input was given', () => {
+      assert.equal(rockPaperScissors('rOcK', ' sword '), "Invalid option given. Have you ever played this before?");
+      assert.equal(rockPaperScissors('turtle', 'SCISSORS'), "Invalid option given. Have you ever played this before?");
+      assert.equal(rockPaperScissors('rock ', 'sCiSOrs'), "Invalid option given. Have you ever played this before?");
     });
   });
 } else {
